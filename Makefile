@@ -6,22 +6,29 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/07/29 17:27:44 by hutzig           ###   ########.fr        #
+#    Updated: 2024/07/30 15:22:15 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-MLX_DIR = ./lib/MLX42
+DIR_MLX = ./lib/MLX42
+DIR_LIBFT = ./lib/libft
+DIR_SRC = ./sources
 
-SOURCES = main.c 
+SOURCES = main.c \
+	log.c \
 
-OBJECTS = $(SOURCES:.c=.o)
+SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 
-HEADERS = -I ./include -I $(MLX_DIR)/include
+OBJECTS = $(SRC:.c=.o)
 
-# MLX42 is dependent on other libraries (dl - dynamically loaded library, glfw - graphics library framework, m - math library
-LIBS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -lm -lpthread 
+HEADERS = -I ./include -I $(DIR_MLX)/include -I $(DIR_LIBFT)
+
+# MLX42 is dependent on other libraries (dl - dynamically loaded library, glfw - graphics library framework, m - math library)
+MLXLIB = $(DIR_MLX)/build/libmlx42.a -ldl -lglfw -lm -lpthread 
+
+LIBFT = -L $(DIR_LIBFT) -lft
 
 CC = cc
 
@@ -29,24 +36,29 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
-all: libmlx $(NAME)
+all: $(NAME)
 
-libmlx:
-	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
+$(NAME): mlx libft $(OBJECTS)
+	@$(CC) $(OBJECTS) $(LIBFT) $(MLXLIB) $(HEADERS) -o $@
 
-%.o: %.c
+mlx:
+	@cmake $(DIR_MLX) -B $(DIR_MLX)/build && make -C $(DIR_MLX)/build -j4
+
+libft:
+	@make -C $(DIR_LIBFT)
+
+$(DIR_SRC)/%.o: $(DIR_SRC)/%.c
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
-
-$(NAME): $(OBJECTS)
-	@$(CC) $(OBJECTS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJECTS)
-	@$(RM) $(MLX_DIR)/build
+	@$(RM) $(DIR_MLX)/build
+	@make -C $(DIR_LIBFT) clean
 
 fclean: clean
 	@$(RM) $(NAME)
+	@make -C $(DIR_LIBFT) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all mlx libft clean fclean re
