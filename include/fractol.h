@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/31 10:58:19 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:29:51 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,15 @@ typedef struct s_fractol
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
+	char		*set;
 	int		red;
 	int		blue;
 	int		green;
 	int		alpha;
 } t_fractol;
 
+// functions
 int	log_guide(void);
+int	is_valid_arg(char *arg);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/07/30 15:22:15 by hutzig           ###   ########.fr        #
+#    Updated: 2024/07/31 13:49:14 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ DIR_LIBFT = ./lib/libft
 DIR_SRC = ./sources
 
 SOURCES = main.c \
-	log.c \
+	fractol_utils.c \
+ 	log.c \
 
 SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 
