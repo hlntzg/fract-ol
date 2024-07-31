@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/30 15:00:21 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/31 10:58:19 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 // resolution
 # define WIDTH 1080
 # define HEIGHT 1080
+
+typedef struct s_fractol
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	int		red;
+	int		blue;
+	int		green;
+	int		alpha;
+} t_fractol;
 
 int	log_guide(void);
 
