@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/31 14:29:51 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/02 12:46:33 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FRACTOL_H
 
 # include "../lib/libft/libft.h"
-//# include "MiniLibX/mlx.h"
-//# include "MiniLibX/mlx_int.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,19 +21,26 @@
 # include <string.h> // strerror
 
 // resolution
-# define WIDTH 1080
-# define HEIGHT 1080
+# define WIDTH 1024
+# define HEIGHT 1024
+# define MAX_ITER 150
 
 typedef struct s_fractol
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	char		*set;
-	int		red;
-	int		blue;
-	int		green;
-	int		alpha;
+	double		julia_cx;
+	double		julia_cy;
 } t_fractol;
+
+typedef struct s_fractal
+{
+	double	zx;
+	double	zy;
+	double	cx;
+	double	cy;
+} t_fractal;
 
 // functions
 int	log_guide(void);
