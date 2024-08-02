@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/02 14:39:56 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/02 16:54:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,24 @@ static	int	compute_escape_time(double zx, double zy, double cx, double cy)
 	return (i);
 }
 
+static void	compute_color_julia(t_fractol *fractol, int i)
+{
+	t_color	c;
+
+	if (i == MAX_ITER)
+		fractol->pixel_color = ft_pixel(0, 0, 0, 255); // black
+	else
+	{
+		if (color_range == )
+
+		else if ()
+
+		else if ()
+
+		fractol->pixel_color = ft_pixel(c.red, c.green, c.blue, 255);
+	}
+}
+
 /* this function maps the pixel coordinates to complex number (r real part, i imaginary part), by calculating the size of each pixel in the complex plane and translating the coordinates(x, y) to complex number */
 static void	pixel_to_complex(uint32_t x, uint32_t y, double *r, double *i, t_fractol *fractol);
 {
@@ -100,7 +118,7 @@ static int	mandelbrot(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 		return (); //function to color the pixel (gradient coloring? t = escape_time / MAX_ITER?)
 }
 
-static int	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
+static void	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 {
 	t_fractal	number;
 	int		i;
@@ -111,10 +129,7 @@ static int	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 	number.cx = -0.745429;//fractol->julia_cx:
 	number.cy = 0.05; //fractol->julia_cy;
 	i = compute_escape_time(number.zx, number.zy, number.cx, number.cy);
-	if (i == MAX_ITER)
-		return (); //function to color points within the set (black?)
-	else
-		return (); //
+	compute_color_julia(fractol, i);
 }
 
 /* this function loops through each pixel on the screen, and use the specific 
@@ -135,10 +150,10 @@ static	void	fractal_visualization(void *param)
 		while (y < HEIGHT)
 		{
 			if (ft_strequ(fractol->set, "julia"))
-				pixel_color = julia(x, y, fractol);
+				julia(x, y, fractol);
 			if (ft_strequ(fractol->set, "mandelbrot"))
 				pixel_color = mandelbrot(x, y, fractol);
-			mlx_put_pixel(fractol->image, x, y, pixel_color);
+			mlx_put_pixel(fractol->image, x, y, fractol->pixel_color);
 			y++;
 		}
 		x++;
@@ -162,7 +177,7 @@ void	init_extra_parameters(char **argv, t_fractol *fractol)
 			fractol->julia_cy = 0.05;
 		}
 		else
-			log_guide();
+	//		log_err("Invalid argument for extra parameters", strerror(5));
 }
 
 int	main(int argc, char **argv)

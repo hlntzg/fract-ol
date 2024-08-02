@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/02 14:29:57 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/02 16:52:52 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_fractol
 	double		real_max;
 	double		imag_min;
 	double		imag_max;
+	uint32_t	pixel_color;
 } t_fractol;
 
 typedef struct s_fractal
@@ -46,8 +47,16 @@ typedef struct s_fractal
 	double	cy;
 } t_fractal;
 
+typedef struct	s_color;
+{
+	uint32_t	red;
+	uint32_t	green;
+	uint32_t	blue;
+} t_color;
+
 // functions
 int	log_guide(void);
 int	is_valid_arg(char *arg);
+uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha);
 
 #endif

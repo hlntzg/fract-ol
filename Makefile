@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/07/31 13:49:14 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/02 16:53:08 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DIR_SRC = ./sources
 SOURCES = main.c \
 	fractol_utils.c \
  	log.c \
+	color.c \
 
 SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 
