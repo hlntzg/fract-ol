@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/02 12:43:19 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/02 14:39:56 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ static void	init_fractol_window(int argc, char **argv, t_fractol *fractol)
 	}
 	(*fractol).image = image; // fractol->image = image;
 	(*fractol).set = argv[1]; // fractol->set = argv[1];
-	if (argc > 2)
-		init_extra_parameters(*argv);
-	
 }
 
 static void	fractol_management(mlx_key_data_t keydata, void *param)
@@ -68,22 +65,25 @@ static	int	compute_escape_time(double zx, double zy, double cx, double cy)
 	return (i);
 }
 
-static void	pixel_to_complex(uint32_t x, uint32_t y, double *real, double *imag);
+/* this function maps the pixel coordinates to complex number (r real part, i imaginary part), by calculating the size of each pixel in the complex plane and translating the coordinates(x, y) to complex number */
+static void	pixel_to_complex(uint32_t x, uint32_t y, double *r, double *i, t_fractol *fractol);
 {
-	double	real_min;
-	double	real_max;
-	double	imag_min;
-	double	imag_max;
+	double	pixel_width;
+	double	pixel_height;
 
-	real_min = -2.0;
-	real_max = 2.0;
-	imag_min = -2.0;
-	imag_max = 2.0;
-	*real = real_min + (double) x * (real_max - real_min / WIDTH);
-	*imag = imag_max - (double) y * (imag_max - imag_min / HEIGHT);
+//	real_min = -2.0;
+//	real_max = 2.0;
+//	imag_min = -2.0;
+//	imag_max = 2.0;
+	pixel_width = (fractol->real_max - fractol_real_min) / WIDTH;
+	pixel_height = (fractol->imag_max - imag_min) / HEIGHT;
+	*r = fractol->real_min + (double) x * pixel_width;
+	*i = fractol->imag_max - (double) y * pixel_height;
+//	*r = real_min + (double) x * (real_max - real_min / WIDTH);
+//	*i = imag_max - (double) y * (imag_max - imag_min / HEIGHT);
 }
 
-static int	mandelbrot(uint32_t pixel_x, uint32_t pixel_y, fractol *fractol)
+static int	mandelbrot(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 {
 	t_fractal	number;
 	int		i;
@@ -100,7 +100,7 @@ static int	mandelbrot(uint32_t pixel_x, uint32_t pixel_y, fractol *fractol)
 		return (); //function to color the pixel (gradient coloring? t = escape_time / MAX_ITER?)
 }
 
-static int	julia(uint32_t pixel_x, uint32_t pixel_y, fractol *fractol)
+static int	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 {
 	t_fractal	number;
 	int		i;
@@ -145,6 +145,26 @@ static	void	fractal_visualization(void *param)
 	}
 }
 
+void	init_extra_parameters(char **argv, t_fractol *fractol)
+{
+	if (!ft_strequ(argv[1], "julia"))
+		return ;
+	else
+	{
+		if (is_signed_decimal(argv[2]) && is_signed_decimal(argv[3]))
+		{
+			fractol->julia_cx = ft_atof(argv[2]);
+			fractol->julia_cy = ft_atof(argv[3]);
+		}
+		else if (!argv[2] || !argv[3])
+		{
+			fractol->julia_cx = -0.745429;
+			fractol->julia_cy = 0.05;
+		}
+		else
+			log_guide();
+}
+
 int	main(int argc, char **argv)
 {
 	t_fractol fractol;
@@ -153,7 +173,9 @@ int	main(int argc, char **argv)
 		return (log_guide());
 	if (is_valid_arg(argv[1]))
 	{
-		init_fractol_window(argc, *argv, &fractol);
+		init_fractol_window(*argv, &fractol);
+		if (argc > 2)
+			init_extra_parameters(*argv, &fractol);
 		//init_hook(&fractol);
 		mlx_key_hook(fractol.mlx, fractol_management, &fractol); // check if it needs to be after the loop_hook! 
 		mlx_loop_hook(fractol.mlx, fractal_visualization, &fractol);
