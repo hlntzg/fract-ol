@@ -6,33 +6,38 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/05 13:06:10 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/05 17:08:38 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	init_fractol_window(char **argv, t_fractol *fractol)
+static void	init_fractol(char **argv, t_fractol *fractol)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
-	
-	mlx = mlx_init(WIDTH, HEIGHT, argv[1], true);
-	if (!mlx)
+	fractol->mlx = mlx_init(WIDTH, HEIGHT, argv[1], false);
+	if (!(fractol->mlx))
 		exit (EXIT_FAILURE);
-	fractol->mlx = mlx;
-	image = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!image)
+	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
+	if (!(fractol->image) || mlx_image_to_window(fractol->mlx, fractol->image, 0, 0) < 0)
 	{
-		mlx_close_window(mlx);
+		mlx_close_window(fractol->mlx);
 		exit (EXIT_FAILURE);
 	}
-	fractol->image = image;
 	fractol->set = argv[1];
-	fractol->real_min = -2.0;
-	fractol->real_max = 2.0;
-	fractol->imag_min = -2.0;
-	fractol->imag_max = 2.0;
+	if (ft_strequ(argv[1], "julia"))
+	{
+		fractol->real_min = -1.7;
+		fractol->real_max = 1.7;
+		fractol->imag_min = -1.7;
+		fractol->imag_max = 1.7;
+	}
+	else if (ft_strequ(argv[1], "mandelbrot"))
+	{
+		fractol->real_min = -1.7;
+		fractol->real_max = 0.7;
+		fractol->imag_min = -1.2;
+		fractol->imag_max = 1.2;
+	}
 }
 
 static void	fractol_management(mlx_key_data_t keydata, void *param)
@@ -46,12 +51,6 @@ static void	fractol_management(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(fractol->mlx);
 }
-/*
-static void	init_hook(t_fractol *fractol)
-{
-	mlx_key_hook(fractol->mlx, &fractol_management, fractol);
-}
-*/
 
 static	int	compute_escape_time(double zx, double zy, double cx, double cy)
 {
@@ -69,28 +68,7 @@ static	int	compute_escape_time(double zx, double zy, double cx, double cy)
 	return (i);
 }
 
-static void	compute_color_julia(t_fractol *fractol, int i)
-{
-	//t_color	c;
-
-	if (i == MAX_ITER)
-	{
-		fractol->pixel_color = ft_pixel(0, 0, 0, 255);
-		return ;
-	}
-/*	else
-	{
-		if (color_range == )
-
-		else if ()
-
-		else if ()
-
-		fractol->pixel_color = ft_pixel(c.red, c.green, c.blue, c.alpha);
-	}*/
-}
-
-static void	compute_color_mandelbrot(t_fractol *fractol, int i)
+static void	compute_color(t_fractol *fractol, int i)
 {
 	t_color	c;
 
@@ -99,7 +77,7 @@ static void	compute_color_mandelbrot(t_fractol *fractol, int i)
 		fractol->pixel_color = ft_pixel(0, 0, 0, 255);
 		return ;
 	}
-	c.red = (uint32_t)(sin(0.02 * i) * 127.5 + 127.5); // Map sine wave to [0, 255]
+	c.red = (uint32_t)(sin(0.05 * i) * 127.5 + 127.5); // Map sine wave to [0, 255]
 	c.green = (uint32_t)(sin(0.0 * i) * 127.5 + 127.5); // 0
 	c.blue = (uint32_t)(sin(0.0 * i) * 127.5 + 127.5); // 0
 	c.alpha = 255;
@@ -114,50 +92,38 @@ static void	pixel_to_complex(uint32_t x, uint32_t y, double *r, double *i, t_fra
 	double	pixel_width;
 	double	pixel_height;
 
-//	real_min = -2.0;
-//	real_max = 2.0;
-//	imag_min = -2.0;
-//	imag_max = 2.0;
 	pixel_width = (fractol->real_max - fractol->real_min) / WIDTH;
 	pixel_height = (fractol->imag_max - fractol->imag_min) / HEIGHT;
 	*r = fractol->real_min + (double) x * pixel_width;
 	*i = fractol->imag_max - (double) y * pixel_height;
-//	*r = real_min + (double) x * (real_max - real_min / WIDTH);
-//	*i = imag_max - (double) y * (imag_max - imag_min / HEIGHT);
 }
 
 static void	mandelbrot(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 {
-	t_fractal	number;
 	int		i;
-	
-	number.zx = 0.0;
-	number.zy = 0.0;
-	pixel_to_complex(pixel_x, pixel_y, &(number.zx), &(number.zy), fractol);
-	//number->cx = pixel_to_complex(pixel_x, 0);
-	//number->cy = pixel_to_complex(0, pixel_y);
-	i = compute_escape_time(number.zx, number.zy, number.cx, number.cy);
-	compute_color_mandelbrot(fractol, i);
+
+	fractol->zx = 0.0;
+	fractol->zy = 0.0;
+	pixel_to_complex(pixel_x, pixel_y, &(fractol->cx), &(fractol->cy), fractol);
+	i = compute_escape_time(fractol->zx, fractol->zy, fractol->cx, fractol->cy);
+	compute_color(fractol, i);
 }
 
 static void	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 {
-	t_fractal	number;
 	int		i;
 
-	pixel_to_complex(pixel_x, pixel_y, &(number.zx), &(number.zy), fractol);
-	//number->zx = pixel_to_complex(pixel_x, 0, fractol);
-	//number->zy = pixel_to_complex(0, pixel_y, fractol);
-	number.cx = -0.745429;//fractol->julia_cx:
-	number.cy = 0.05; //fractol->julia_cy;
-	i = compute_escape_time(number.zx, number.zy, number.cx, number.cy);
-	printf("julia before color");
-	compute_color_julia(fractol, i);
+	fractol->cx = fractol->julia_cx;
+	fractol->cy = fractol->julia_cy;
+	pixel_to_complex(pixel_x, pixel_y, &(fractol->zx), &(fractol->zy), fractol);
+	i = compute_escape_time(fractol->zx, fractol->zy, fractol->cx, fractol->cy);
+	compute_color(fractol, i);
 }
 
 /* this function loops through each pixel on the screen, and use the specific 
 fractal set function to map the pixel to a point in the complex plane and
 determine its color based on the number of iterations before escape */
+//static	void	fractal_visualization(void *param)
 static	void	fractal_visualization(void *param)
 {
 	t_fractol	*fractol;
@@ -182,25 +148,22 @@ static	void	fractal_visualization(void *param)
 	}
 }
 
-void	init_extra_parameters(char **argv, t_fractol *fractol)
+static void	init_parameters(char **argv, t_fractol *fractol)
 {
 	if (!ft_strequ(argv[1], "julia"))
 		return ;
-	else
+	if (!argv[2] || !argv[3])
 	{
-		if (is_signed_decimal(argv[2]) && is_signed_decimal(argv[3]))
-		{
-			fractol->julia_cx = ft_atof(argv[2]);
-			fractol->julia_cy = ft_atof(argv[3]);
-		}
-		else if (!argv[2] || !argv[3])
-		{
-			fractol->julia_cx = -0.745429;
-			fractol->julia_cy = 0.05;
-		}
-//		else
-	//		log_err("Invalid argument for extra parameters", strerror(5));
+		fractol->julia_cx = -0.745429;
+		fractol->julia_cy = 0.05;
 	}
+	else if (is_signed_decimal(argv[2]) && is_signed_decimal(argv[3]))
+	{
+		fractol->julia_cx = ft_atof(argv[2]);
+		fractol->julia_cy = ft_atof(argv[3]);
+	}
+//	else
+//		log_err("Invalid argument for extra parameters", strerror(5));
 }
 
 int	main(int argc, char **argv)
@@ -209,16 +172,14 @@ int	main(int argc, char **argv)
 
 	if (argc < 2 || !is_valid_arg(argv[1]))
 		return (log_guide());
-	if (is_valid_arg(argv[1]))
-	{
-		init_fractol_window(&(*argv), &fractol);
-		if (argc > 2)
-			init_extra_parameters(&(*argv), &fractol);
-		//init_hook(&fractol);
-		mlx_key_hook(fractol.mlx, fractol_management, &fractol);
-		mlx_loop_hook(fractol.mlx, fractal_visualization, &fractol);
-		mlx_loop(fractol.mlx);
-		mlx_terminate(fractol.mlx);
-	}
+	init_fractol(argv, &fractol);
+	init_parameters(argv, &fractol);
+	mlx_key_hook(fractol.mlx, fractol_management, &fractol);
+//	fractal_visualization(&fractol);	
+	mlx_loop_hook(fractol.mlx, fractal_visualization, &fractol);
+	mlx_scroll_hook();
+	mlx_loop(fractol.mlx);
+	mlx_terminate(fractol.mlx);
+
 	return (0);
 }

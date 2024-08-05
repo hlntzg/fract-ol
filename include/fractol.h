@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/05 12:56:53 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/05 16:58:50 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <math.h>
 
 // resolution
-# define WIDTH 1024
-# define HEIGHT 1024
-# define MAX_ITER 150
+# define WIDTH 1500
+# define HEIGHT 1500
+# define MAX_ITER 100
 
 typedef struct s_fractol
 {
@@ -37,17 +37,14 @@ typedef struct s_fractol
 	double		real_max;
 	double		imag_min;
 	double		imag_max;
+	double		zoom;
 	uint32_t	pixel_color;
 	uint32_t	color_range;
+	double		zx;
+	double		zy;
+	double		cx;
+	double		cy;
 } t_fractol;
-
-typedef struct s_fractal
-{
-	double	zx;
-	double	zy;
-	double	cx;
-	double	cy;
-} t_fractal;
 
 typedef struct	s_color
 {
@@ -62,6 +59,5 @@ int	log_guide(void);
 int	is_valid_arg(const char *arg);
 int	is_signed_decimal(const char *str);
 uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha);
-//uint32_t	color_value(int value, int min, int max);
 
 #endif
