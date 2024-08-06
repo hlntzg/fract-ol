@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/05 17:08:38 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/06 10:40:28 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	init_fractol(char **argv, t_fractol *fractol)
 		exit (EXIT_FAILURE);
 	}
 	fractol->set = argv[1];
+	fractol->move_factor = 0.025;
 	if (ft_strequ(argv[1], "julia"))
 	{
 		fractol->real_min = -1.7;
@@ -40,16 +41,47 @@ static void	init_fractol(char **argv, t_fractol *fractol)
 	}
 }
 
-static void	fractol_management(mlx_key_data_t keydata, void *param)
+static void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 {
 	t_fractol	*fractol;
 
 	fractol = (t_fractol *)param;
-
-	if (keydata.key == MLX_KEY_G && keydata.action == MLX_PRESS)
-		log_guide();
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(fractol->mlx);
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_G))
+		log_guide();
+}
+
+static void	ft_keyhook_arrowkeys(mlx_key_data_t keydata, void *param)
+{
+	t_fractol	*fractol;
+	double		delta_x;
+	double		delta_y;
+
+	(void) keydata; //review this, should, in main, send the & of the function?
+	fractol = (t_fractol *)param;
+	delta_x = (fractol->real_max - fractol->real_min) * fractol->move_factor;
+	delta_y = (fractol->imag_max - fractol->imag_min) * fractol->move_factor;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT))
+	{
+		fractol->real_min += delta_x;
+		fractol->real_max += delta_x;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT))
+	{
+		fractol->real_min -= delta_x;
+		fractol->real_max -= delta_x;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
+	{
+		fractol->imag_min -= delta_y;
+		fractol->imag_max -= delta_y;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
+	{
+		fractol->imag_min += delta_y;
+		fractol->imag_max += delta_y;
+	}
 }
 
 static	int	compute_escape_time(double zx, double zy, double cx, double cy)
@@ -120,11 +152,19 @@ static void	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
 	compute_color(fractol, i);
 }
 
+static void	burning_ship(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
+{
+	int	i;
+
+	
+
+}
+
 /* this function loops through each pixel on the screen, and use the specific 
 fractal set function to map the pixel to a point in the complex plane and
 determine its color based on the number of iterations before escape */
 //static	void	fractal_visualization(void *param)
-static	void	fractal_visualization(void *param)
+static	void	ft_fractol_render(void *param)
 {
 	t_fractol	*fractol;
 	uint32_t	x;
@@ -166,6 +206,21 @@ static void	init_parameters(char **argv, t_fractol *fractol)
 //		log_err("Invalid argument for extra parameters", strerror(5));
 }
 
+static void	ft_scrollhook(double xdelta, double ydelta, void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	fractol->mouse_x = 0;
+	fractol->mouse_y = 0;
+	mlx_get_mouse_pos(fractol->mlx, &fractol->mouse_x, &fractol->mouse_y);	
+
+
+
+
+	
+}
+
 int	main(int argc, char **argv)
 {
 	t_fractol fractol;
@@ -174,10 +229,10 @@ int	main(int argc, char **argv)
 		return (log_guide());
 	init_fractol(argv, &fractol);
 	init_parameters(argv, &fractol);
-	mlx_key_hook(fractol.mlx, fractol_management, &fractol);
-//	fractal_visualization(&fractol);	
-	mlx_loop_hook(fractol.mlx, fractal_visualization, &fractol);
-	mlx_scroll_hook();
+	mlx_key_hook(fractol.mlx, ft_keyhook_general, &fractol);
+	mlx_key_hook(fractol.mlx, ft_keyhook_arrowkeys, &fractol);
+	mlx_loop_hook(fractol.mlx, ft_fractol_render, &fractol);
+	mlx_scroll_hook(fractol.mlx, ft_scrollhook, &fractol);
 	mlx_loop(fractol.mlx);
 	mlx_terminate(fractol.mlx);
 

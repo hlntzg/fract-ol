@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/05 16:58:50 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/06 10:19:54 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ typedef struct s_fractol
 	double		real_max;
 	double		imag_min;
 	double		imag_max;
+	double		move_factor;
 	double		zoom;
+	uint32_t	mouse_x;
+	uint32_t	mouse_y;
 	uint32_t	pixel_color;
 	uint32_t	color_range;
 	double		zx;
