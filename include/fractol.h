@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/06 10:19:54 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/06 11:40:17 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 // resolution
 # define WIDTH 1500
 # define HEIGHT 1500
-# define MAX_ITER 100
 
 typedef struct s_fractol
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	char		*set;
+	uint32_t	max_iter;
 	double		julia_cx;
 	double		julia_cy;
 	double		real_min;
