@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/07 11:32:11 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/07 18:21:02 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@
 // resolution
 # define WIDTH 1500
 # define HEIGHT 1500
-
+/*
+typedef struct 	s_juliette
+{
+	double	x;
+	double	y;
+}	t_juliette;
+*/
 typedef struct s_fractol
 {
 	mlx_t		*mlx;
@@ -38,16 +44,21 @@ typedef struct s_fractol
 	double		real_max;
 	double		imag_min;
 	double		imag_max;
+	double		real_delta;
+	double		imag_delta;
 	double		move_factor;
 	double		zoom;
 	int32_t		mouse_x;
 	int32_t		mouse_y;
 	uint32_t	pixel_color;
-	uint32_t	color_range;
 	double		zx;
 	double		zy;
 	double		cx;
 	double		cy;
+	double		k_red;
+	double		k_green;
+	double		k_blue;
+
 } t_fractol;
 
 typedef struct	s_color
@@ -62,7 +73,7 @@ typedef struct	s_color
 int	log_guide(void);
 int	is_valid_arg(const char *arg);
 int	is_signed_decimal(const char *str);
-uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha);
+uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t a);
 double	ft_abs(double nb);
 
 #endif
