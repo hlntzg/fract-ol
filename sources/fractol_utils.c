@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:47:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/06 11:46:34 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/06 15:57:15 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ int	is_signed_decimal(const char *str)
 		str++;
 	}
 	return ((digit_before_point || decimal_point) && (digit_before_point || digit_after_point));
+}
+
+double	ft_abs(double nb)
+{
+	if (nb < 0)
+		return (-nb);
+	else
+		return (nb);
 }
