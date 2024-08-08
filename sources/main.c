@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/07 18:16:11 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 13:52:15 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,59 +175,51 @@ static	void	compute_escape_time(t_fractol *fractol)
 	}
 }
 
-static void	compute_color(t_fractol *fractol)
-{
-	t_color	c;
 
-	if (fractol->iter == fractol->max_iter)
-	{
-		fractol->pixel_color = ft_pixel(0, 0, 0, 255);
-		return ;
-	}
-	c.red = (sin(fractol->k_red * fractol->iter) * 255);
-	c.green = (sin(fractol->k_green * fractol->iter) * 255);
-	c.blue = (sin(fractol->k_blue * fractol->iter) * 255);
-	c.alpha = 255;
-	fractol->pixel_color = ft_pixel(c.red, c.green, c.blue, c.alpha);
-}
 	
 /* this function maps the pixel coordinates to complex number (r real part,
 i imaginary part), by calculating the size of each pixel in the complex plane 
 and translating the coordinates(x, y) to complex number */
-void	pixel_to_complex(uint32_t x, uint32_t y, double *r, double *i, t_fractol *fractol)
+void	pixel_to_complex(double *r, double *i, t_fractol *fractol)
 {
 	double	pixel_width;
 	double	pixel_height;
 
 	pixel_width = (fractol->real_max - fractol->real_min) / WIDTH;
 	pixel_height = (fractol->imag_max - fractol->imag_min) / HEIGHT;
-	*r = fractol->real_min + (double) x * pixel_width;
-	*i = fractol->imag_max - (double) y * pixel_height;
+	*r = fractol->real_min + (double) fractol->pixel_x * pixel_width;
+	*i = fractol->imag_max - (double) fractol->pixel_y * pixel_height;
 }
 
-static void	mandelbrot(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
+static void	mandelbrot(uint32_t x, uint32_t y, t_fractol *fractol)
 {
 	fractol->zx = 0.0;
 	fractol->zy = 0.0;
-	pixel_to_complex(pixel_x, pixel_y, &(fractol->cx), &(fractol->cy), fractol);
+	fractol->pixel_x = x;
+	fractol->pixel_y = y;
+	pixel_to_complex(&(fractol->cx), &(fractol->cy), fractol);
 	compute_escape_time(fractol);
 	compute_color(fractol);
 }
 
-static void	julia(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
+static void	julia(uint32_t x, uint32_t y, t_fractol *fractol)
 {
 	fractol->cx = fractol->julia_cx;
 	fractol->cy = fractol->julia_cy;
-	pixel_to_complex(pixel_x, pixel_y, &(fractol->zx), &(fractol->zy), fractol);
+	fractol->pixel_x = x;
+	fractol->pixel_y = y;
+	pixel_to_complex(&(fractol->zx), &(fractol->zy), fractol);
 	compute_escape_time(fractol);
 	compute_color(fractol);
 }
 
-static void	burning_ship(uint32_t pixel_x, uint32_t pixel_y, t_fractol *fractol)
+static void	burning_ship(uint32_t x, uint32_t y, t_fractol *fractol)
 {
 	fractol->zx = 0.0;
 	fractol->zy = 0.0;
-	pixel_to_complex(pixel_x, pixel_y, &(fractol->cx), &(fractol->cy), fractol);
+	fractol->pixel_x = x;
+	fractol->pixel_y = y;
+	pixel_to_complex(&(fractol->cx), &(fractol->cy), fractol);
 	compute_escape_time_burning(fractol);
 	compute_color(fractol);
 }
@@ -288,10 +280,10 @@ static void	ft_scrollhook(double xdelta, double ydelta, void *param)
 
 	(void) xdelta;
 	fractol = (t_fractol *)param;
-	fractol->mouse_x = 0;
-	fractol->mouse_y = 0;
-	mlx_get_mouse_pos(fractol->mlx, &(fractol->mouse_x), &(fractol->mouse_y));
-	pixel_to_complex(fractol->mouse_x, fractol->mouse_y, &mouse_real, &mouse_imag, fractol);
+	fractol->pixel_x = 0;
+	fractol->pixel_y = 0;
+	mlx_get_mouse_pos(fractol->mlx, &(fractol->pixel_x), &(fractol->pixel_y));
+	pixel_to_complex(&mouse_real, &mouse_imag, fractol);
 	if (ydelta > 0)
 		fractol->zoom = 0.9;
 	else if (ydelta < 0)

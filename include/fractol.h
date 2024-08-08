@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/07 18:21:02 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 13:51:39 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct s_fractol
 	double		imag_delta;
 	double		move_factor;
 	double		zoom;
-	int32_t		mouse_x;
-	int32_t		mouse_y;
+//	int32_t		mouse_x;
+//	int32_t		mouse_y;
 	uint32_t	pixel_color;
 	double		zx;
 	double		zy;
@@ -58,7 +58,8 @@ typedef struct s_fractol
 	double		k_red;
 	double		k_green;
 	double		k_blue;
-
+	int32_t		pixel_x;
+	int32_t		pixel_y;
 } t_fractol;
 
 typedef struct	s_color
@@ -73,7 +74,10 @@ typedef struct	s_color
 int	log_guide(void);
 int	is_valid_arg(const char *arg);
 int	is_signed_decimal(const char *str);
-uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t a);
 double	ft_abs(double nb);
+
+
+void	compute_color(t_fractol *fractol);
+uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t a);
 
 #endif
