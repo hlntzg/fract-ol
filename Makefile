@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/08 13:33:50 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/08 14:12:33 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,12 @@ DIR_LIBFT = ./lib/libft
 DIR_SRC = ./sources
 
 SOURCES = main.c \
+	fractol_rendering.c \
 	fractol_utils.c \
  	log.c \
 	fractol_colors.c \
+	fractal_sets.c \
+	fractol_hooks.c \
 
 SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 

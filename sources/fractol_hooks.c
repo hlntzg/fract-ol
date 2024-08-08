@@ -1,0 +1,109 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_hooks.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
+/*   Updated: 2024/08/08 14:15:00 by hutzig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+
+void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(fractol->mlx);
+	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+		log_guide();
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+		init_struct(fractol);
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD))
+		fractol->max_iter *= 2;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT))
+		fractol->max_iter *= 0.5;
+}
+
+void	ft_keyhook_colors(void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_R))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			fractol->k_red *= 0.5;
+		else
+			fractol->k_red *= 2;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_G))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			fractol->k_green *= 0.5;
+		else
+			fractol->k_green *= 2;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_B))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			fractol->k_blue *= 0.5; 
+		else
+			fractol->k_blue *= 2;
+	}
+}
+
+void	ft_keyhook_arrowkeys(void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	fractol->real_delta = fractol->real_max - fractol->real_min;
+	fractol->imag_delta = fractol->imag_max - fractol->imag_min;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT))
+	{
+		fractol->real_min += fractol->real_delta * fractol->move_factor;
+		fractol->real_max += fractol->real_delta * fractol->move_factor;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT))
+	{
+		fractol->real_min -= fractol->real_delta * fractol->move_factor;
+		fractol->real_max -= fractol->real_delta * fractol->move_factor;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
+	{
+		fractol->imag_min -= fractol->imag_delta * fractol->move_factor;
+		fractol->imag_max -= fractol->imag_delta * fractol->move_factor;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
+	{
+		fractol->imag_min += fractol->imag_delta * fractol->move_factor;
+		fractol->imag_max += fractol->imag_delta * fractol->move_factor;
+	}
+}
+
+void	ft_scrollhook(double xdelta, double ydelta, void *param)
+{
+	t_fractol	*fractol;
+	double		mouse_real;
+	double		mouse_imag;
+
+	(void) xdelta;
+	fractol = (t_fractol *)param;
+	fractol->pixel_x = 0;
+	fractol->pixel_y = 0;
+	mlx_get_mouse_pos(fractol->mlx, &(fractol->pixel_x), &(fractol->pixel_y));
+	pixel_to_complex(&mouse_real, &mouse_imag, fractol);
+	if (ydelta > 0)
+		fractol->zoom = 0.9;
+	else if (ydelta < 0)
+		fractol->zoom = 1.1;
+	fractol->real_min = mouse_real + (fractol->real_min - mouse_real) * fractol->zoom;
+	fractol->real_max = mouse_real + (fractol->real_max - mouse_real) * fractol->zoom;
+	fractol->imag_min = mouse_imag + (fractol->imag_min - mouse_imag) * fractol->zoom;
+	fractol->imag_max = mouse_imag + (fractol->imag_max - mouse_imag) * fractol->zoom;
+}
