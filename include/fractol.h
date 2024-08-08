@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 14:59:13 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 17:48:57 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 // resolution
 # define WIDTH 1500
 # define HEIGHT 1500
-/*
-typedef struct 	s_juliette
+
+typedef struct 	s_set
 {
 	double	x;
 	double	y;
-}	t_juliette;
-*/
+}	t_set;
+
 typedef struct s_fractol
 {
 	mlx_t		*mlx;
@@ -38,8 +38,9 @@ typedef struct s_fractol
 	char		*set;
 	uint32_t	max_iter;
 	uint32_t	iter;
-	double		julia_cx;
-	double		julia_cy;
+	t_set		julia_c;
+	//double		julia_cx;
+	//double		julia_cy;
 	double		real_min;
 	double		real_max;
 	double		imag_min;
@@ -68,13 +69,16 @@ typedef struct	s_color
 	uint32_t	alpha;
 } t_color;
 
+int	log_err(char *str, char *strerror);
 int	log_guide(void);
-int	is_valid_arg(char *argv);
+int	is_valid_arg(int argc, char **argv);
 int	is_signed_decimal(const char *str);
 double	ft_abs(double nb);
 
+void	init_fractol(t_fractol *fractol, char **argv);
 void	init_view(t_fractol *fractol);
 void	init_colors(t_fractol *fractol);
+void	init_julia(t_fractol *fractol, char **argv);
 
 void	ft_fractol_render(void *param);
 void	julia(uint32_t x, uint32_t y, t_fractol *fractol);

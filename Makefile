@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/08 14:12:33 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/08 17:49:39 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SOURCES = main.c \
 	fractol_colors.c \
 	fractal_sets.c \
 	fractol_hooks.c \
+	fractol_initialization.c \
 
 SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 

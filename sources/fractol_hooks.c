@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 15:04:22 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 18:05:23 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,21 @@ void	ft_keyhook_arrowkeys(void *param)
 void	ft_scrollhook(double xdelta, double ydelta, void *param)
 {
 	t_fractol	*fractol;
-	double		mouse_real;
-	double		mouse_imag;
+	double		mouse_r;
+	double		mouse_i;
 
 	(void) xdelta;
 	fractol = (t_fractol *)param;
 	fractol->pixel_x = 0;
 	fractol->pixel_y = 0;
 	mlx_get_mouse_pos(fractol->mlx, &(fractol->pixel_x), &(fractol->pixel_y));
-	pixel_to_complex(&mouse_real, &mouse_imag, fractol);
+	pixel_to_complex(&mouse_r, &mouse_i, fractol);
 	if (ydelta > 0)
 		fractol->zoom = 0.9;
 	else if (ydelta < 0)
 		fractol->zoom = 1.1;
-	fractol->real_min = mouse_real + (fractol->real_min - mouse_real) * fractol->zoom;
-	fractol->real_max = mouse_real + (fractol->real_max - mouse_real) * fractol->zoom;
-	fractol->imag_min = mouse_imag + (fractol->imag_min - mouse_imag) * fractol->zoom;
-	fractol->imag_max = mouse_imag + (fractol->imag_max - mouse_imag) * fractol->zoom;
+	fractol->real_min = mouse_r + (fractol->real_min - mouse_r) * fractol->zoom;
+	fractol->real_max = mouse_r + (fractol->real_max - mouse_r) * fractol->zoom;
+	fractol->imag_min = mouse_i + (fractol->imag_min - mouse_i) * fractol->zoom;
+	fractol->imag_max = mouse_i + (fractol->imag_max - mouse_i) * fractol->zoom;
 }
