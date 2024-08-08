@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:49:08 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 13:34:47 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 15:02:06 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	compute_color(t_fractol *fractol)
 	c.alpha = 255;
 	fractol->pixel_color = ft_pixel(c.red, c.green, c.blue, c.alpha);
 }
+
 uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t a)
 {
 	return (red << 24 | green << 16 | blue << 8 | a);

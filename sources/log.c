@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:53:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/07 18:23:39 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 14:56:03 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	log_guide(void)
 		"\n\nMore options:"
 		"\n\tTAB to display this guide;"
 		"\n\tESC to close the window and quit the program;"
-		"\n\tR and shift + R to increase or decrease the red color channel"
-		"\n\tG and shift + G to increase or decrease the green color channel"
-		"\n\tB and shift + B to increase or decrease the blue color channel"
-		"\n\tUse the arrow keys (right, left, down and up) to move the view;"
-		"\n\tUse the scroll to zoom in and out according to the mouse position;"
+		"\n\tSPACE to resize the fractal and SHIFT + SPACE to reset colors"
+		"\n\tR and SHIFT + R to increase or decrease the red color channel"
+		"\n\tG and SHIFT + G to increase or decrease the green color channel"
+		"\n\tB and SHIFT + B to increase or decrease the blue color channel"
+		"\n\tArrow keys (right, left, down and up) to move the view;"
+		"\n\tScroll to zoom in and out according to the mouse position;"
 		"\n\tPress the + or - key on the keypad to increase or decrease the "
 		"number of iterations and add more or less detail to the fractal image;"
 		"\n\n", 1);

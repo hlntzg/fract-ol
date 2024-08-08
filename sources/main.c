@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 14:15:21 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 14:58:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init_struct(t_fractol *fractol)
+void	init_view(t_fractol *fractol)
 {
 	if (ft_strequ(fractol->set, "julia"))
 	{
@@ -36,27 +36,8 @@ void	init_struct(t_fractol *fractol)
 		fractol->imag_max = 2.0;
 	}
 }
-static void	init_fractol(t_fractol *fractol)
-{
-	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->set, true);
-	if (!(fractol->mlx))
-		exit (EXIT_FAILURE);
-	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(fractol->mlx, fractol->image, 0, 0);
-	if (!(fractol->image))
-	{
-		mlx_close_window(fractol->mlx);
-		exit (EXIT_FAILURE);
-	}
-	fractol->max_iter = 50;
-	fractol->move_factor = 0.025;
-	fractol->k_red = 0.01;
-	fractol->k_green = 0.01;
-	fractol->k_blue = 0.01;
-	init_struct(fractol);
-}
 
-static void	init_parameters(char **argv, t_fractol *fractol)
+static void	init_julia(t_fractol *fractol, char **argv)
 {
 	fractol->set = argv[1];
 	if (!ft_strequ(argv[1], "julia"))
@@ -75,6 +56,34 @@ static void	init_parameters(char **argv, t_fractol *fractol)
 //		log_err("Invalid argument for extra parameters", strerror(5));
 }
 
+void	init_colors(t_fractol *fractol)
+{
+	fractol->k_red = 0.01;
+	fractol->k_green = 0.01;
+	fractol->k_blue = 0.01;
+}
+
+static void	init_fractol(t_fractol *fractol, char **argv)
+{
+	fractol->set = argv[1];
+	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->set, true);
+	if (!(fractol->mlx))
+		exit (EXIT_FAILURE);
+	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(fractol->mlx, fractol->image, 0, 0);
+	if (!(fractol->image))
+	{
+		mlx_close_window(fractol->mlx);
+		exit (EXIT_FAILURE);
+	}
+	if (ft_strequ(argv[1], "julia"))
+		init_julia(fractol, argv);	
+	fractol->max_iter = 50;
+	fractol->move_factor = 0.025;
+	init_view(fractol);
+	init_colors(fractol);
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -82,8 +91,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2 || !is_valid_arg(argv[1]))
 		return (log_guide());
-	init_parameters(argv, &fractol);
-	init_fractol(&fractol);
+	init_fractol(&fractol, argv);
 	mlx_key_hook(fractol.mlx, ft_keyhook_general, &fractol);
 	mlx_loop_hook(fractol.mlx, ft_keyhook_colors, &fractol);
 	mlx_loop_hook(fractol.mlx, ft_keyhook_arrowkeys, &fractol);

@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 14:15:00 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 15:04:22 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
 		log_guide();
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
-		init_struct(fractol);
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			init_colors(fractol);
+		init_view(fractol);
+	}
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD))
 		fractol->max_iter *= 2;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT))
@@ -51,7 +55,7 @@ void	ft_keyhook_colors(void *param)
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_B))
 	{
 		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			fractol->k_blue *= 0.5; 
+			fractol->k_blue *= 0.5;
 		else
 			fractol->k_blue *= 2;
 	}

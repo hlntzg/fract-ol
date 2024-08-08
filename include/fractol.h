@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 14:17:04 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/08 14:59:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ typedef struct	s_color
 	uint32_t	alpha;
 } t_color;
 
-// functions
 int	log_guide(void);
-int	is_valid_arg(const char *arg);
+int	is_valid_arg(char *argv);
 int	is_signed_decimal(const char *str);
 double	ft_abs(double nb);
 
-void	init_struct(t_fractol *fractol);
+void	init_view(t_fractol *fractol);
+void	init_colors(t_fractol *fractol);
 
 void	ft_fractol_render(void *param);
 void	julia(uint32_t x, uint32_t y, t_fractol *fractol);
