@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:04:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 15:04:48 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:31:09 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	compute_escape_time_burning(t_fractol *fractol)
 	double	cx;
 	double	cy;
 
-	zx = fractol->zx;
-	zy = fractol->zy;
-	cx = fractol->cx;
-	cy = fractol->cy;
+	zx = fractol->z.x;
+	zy = fractol->z.y;
+	cx = fractol->c.x;
+	cy = fractol->c.y;
 	fractol->iter = 0;
 	while ((zx * zx) + (zy * zy) < 4.0 && fractol->iter < fractol->max_iter)
 	{
@@ -71,10 +71,10 @@ void	compute_escape_time(t_fractol *fractol)
 	double	cx;
 	double	cy;
 
-	zx = fractol->zx;
-	zy = fractol->zy;
-	cx = fractol->cx;
-	cy = fractol->cy;
+	zx = fractol->z.x;
+	zy = fractol->z.y;
+	cx = fractol->c.x;
+	cy = fractol->c.y;
 	fractol->iter = 0;
 	while ((zx * zx) + (zy * zy) < 4.0 && fractol->iter < fractol->max_iter)
 	{

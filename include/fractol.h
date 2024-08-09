@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:08:03 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:36:12 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,20 @@ typedef struct s_fractol
 	uint32_t	max_iter;
 	uint32_t	iter;
 	t_set		julia_c;
-	//double		julia_cx;
-	//double		julia_cy;
-//	double		real_min;
-//	double		real_max;
-//	double		imag_min;
-//	double		imag_max;
-	//double		real_delta;
-	//double		imag_delta;
 	t_range		real;
 	t_range		imag;
 	double		move_factor;
 	double		zoom;
 	uint32_t	pixel_color;
-	double		zx;
-	double		zy;
-	double		cx;
-	double		cy;
+	t_set		z;
+	t_set		c;
+//	t_color		get;
 	double		k_red;
 	double		k_green;
 	double		k_blue;
 	int32_t		pixel_x;
 	int32_t		pixel_y;
+	t_set		pixel;
 }	t_fractol;
 
 typedef struct	s_color
