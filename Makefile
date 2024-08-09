@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/09 14:32:12 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/09 14:53:49 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(DIR_MLX)
 	@make -C $(DIR_LIBFT) fclean
 
 re: fclean all
