@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 09:59:14 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:08:03 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ typedef struct s_fractol
 	t_set		julia_c;
 	//double		julia_cx;
 	//double		julia_cy;
-	double		real_min;
-	double		real_max;
-	double		imag_min;
-	double		imag_max;
+//	double		real_min;
+//	double		real_max;
+//	double		imag_min;
+//	double		imag_max;
 	//double		real_delta;
 	//double		imag_delta;
 	t_range		real;

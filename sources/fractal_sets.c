@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:58:38 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 09:46:18 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:07:51 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	pixel_to_complex(double *r, double *i, t_fractol *fractol)
 	double	pixel_width;
 	double	pixel_height;
 
-	pixel_width = (fractol->real_max - fractol->real_min) / WIDTH;
-	pixel_height = (fractol->imag_max - fractol->imag_min) / HEIGHT;
-	*r = fractol->real_min + (double) fractol->pixel_x * pixel_width;
-	*i = fractol->imag_max - (double) fractol->pixel_y * pixel_height;
+	pixel_width = (fractol->real.max - fractol->real.min) / WIDTH;
+	pixel_height = (fractol->imag.max - fractol->imag.min) / HEIGHT;
+	*r = fractol->real.min + (double) fractol->pixel_x * pixel_width;
+	*i = fractol->imag.max - (double) fractol->pixel_y * pixel_height;
 }
 
 void	mandelbrot(uint32_t x, uint32_t y, t_fractol *fractol)

@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:45:39 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 09:47:59 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:06:37 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,24 @@ void	init_view(t_fractol *fractol)
 {
 	if (ft_strequ(fractol->set, "julia"))
 	{
-		fractol->real_min = -1.7;
-		fractol->real_max = 1.7;
-		fractol->imag_min = -1.7;
-		fractol->imag_max = 1.7;
+		fractol->real.min = -1.7;
+		fractol->real.max = 1.7;
+		fractol->imag.min = -1.7;
+		fractol->imag.max = 1.7;
 	}
 	else if (ft_strequ(fractol->set, "mandelbrot"))
 	{
-		fractol->real_min = -2.0;
-		fractol->real_max = 0.6;
-		fractol->imag_min = -1.2;
-		fractol->imag_max = 1.2;
+		fractol->real.min = -2.0;
+		fractol->real.max = 0.6;
+		fractol->imag.min = -1.2;
+		fractol->imag.max = 1.2;
 	}
 	else if (ft_strequ(fractol->set, "burning"))
 	{
-		fractol->real_min = -1.0;
-		fractol->real_max = 2.0;
-		fractol->imag_min = -1.0;
-		fractol->imag_max = 2.0;
+		fractol->real.min = -1.0;
+		fractol->real.max = 2.0;
+		fractol->imag.min = -1.0;
+		fractol->imag.max = 2.0;
 	}
 }
 
