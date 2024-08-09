@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 18:05:23 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 09:57:56 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,27 @@ void	ft_keyhook_arrowkeys(void *param)
 	t_fractol	*fractol;
 
 	fractol = (t_fractol *)param;
-	fractol->real_delta = fractol->real_max - fractol->real_min;
-	fractol->imag_delta = fractol->imag_max - fractol->imag_min;
+	fractol->real.delta = fractol->real_max - fractol->real_min;
+	fractol->imag.delta = fractol->imag_max - fractol->imag_min;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT))
 	{
-		fractol->real_min += fractol->real_delta * fractol->move_factor;
-		fractol->real_max += fractol->real_delta * fractol->move_factor;
+		fractol->real_min += fractol->real.delta * fractol->move_factor;
+		fractol->real_max += fractol->real.delta * fractol->move_factor;
 	}
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT))
 	{
-		fractol->real_min -= fractol->real_delta * fractol->move_factor;
-		fractol->real_max -= fractol->real_delta * fractol->move_factor;
+		fractol->real_min -= fractol->real.delta * fractol->move_factor;
+		fractol->real_max -= fractol->real.delta * fractol->move_factor;
 	}
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
 	{
-		fractol->imag_min -= fractol->imag_delta * fractol->move_factor;
-		fractol->imag_max -= fractol->imag_delta * fractol->move_factor;
+		fractol->imag_min -= fractol->imag.delta * fractol->move_factor;
+		fractol->imag_max -= fractol->imag.delta * fractol->move_factor;
 	}
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
 	{
-		fractol->imag_min += fractol->imag_delta * fractol->move_factor;
-		fractol->imag_max += fractol->imag_delta * fractol->move_factor;
+		fractol->imag_min += fractol->imag.delta * fractol->move_factor;
+		fractol->imag_max += fractol->imag.delta * fractol->move_factor;
 	}
 }
 

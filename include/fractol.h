@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 17:48:57 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 09:59:14 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 // resolution
 # define WIDTH 1500
 # define HEIGHT 1500
+
+typedef struct 	s_range
+{
+	double	min;
+	double	max;
+	double	delta;
+}	t_range;
 
 typedef struct 	s_set
 {
@@ -45,8 +52,10 @@ typedef struct s_fractol
 	double		real_max;
 	double		imag_min;
 	double		imag_max;
-	double		real_delta;
-	double		imag_delta;
+	//double		real_delta;
+	//double		imag_delta;
+	t_range		real;
+	t_range		imag;
 	double		move_factor;
 	double		zoom;
 	uint32_t	pixel_color;
@@ -59,7 +68,7 @@ typedef struct s_fractol
 	double		k_blue;
 	int32_t		pixel_x;
 	int32_t		pixel_y;
-} t_fractol;
+}	t_fractol;
 
 typedef struct	s_color
 {
@@ -67,7 +76,7 @@ typedef struct	s_color
 	uint32_t	green;
 	uint32_t	blue;
 	uint32_t	alpha;
-} t_color;
+}	t_color;
 
 int	log_err(char *str, char *strerror);
 int	log_guide(void);
