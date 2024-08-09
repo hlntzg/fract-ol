@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:53:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 18:09:03 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 12:03:46 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	log_guide(void)
 		"\n\t./fractol julia [unsigned_double_a] [unsigned_double_b]"
 		"\n\nExamples for Julia sets:\n\t-0.4\t0.6\n\t0.285\t0.01\n\t0\t0.8"
 		"\n\t-1.476\t0\n\t-0.12\t-0.77"
-		"\n\nMore options:"
+		"\n\nGeneral guide:"
 		"\n\tTAB to display this guide;"
 		"\n\tESC to close the window and quit the program;"
 		"\n\tSPACE to resize the fractal and SHIFT + SPACE to reset colors"
@@ -42,6 +42,10 @@ int	log_guide(void)
 		"\n\tScroll to zoom in and out according to the mouse position;"
 		"\n\tPress the + or - key on the keypad to increase or decrease the "
 		"number of iterations and add more or less detail to the fractal image;"
+		"\n\nMore options for Julia:""\n\tCONTROL_LEFT to increase the real part "
+		"of the complex constant, and CONTROL_LEFT + SHIFT_LEFT to decrease it;"
+		"\n\tCONTROL_RIGHT to increase the imaginary part of the complex "
+		"constant, and CONTROL_LEFT + SHIFT_LEFT to decrease it;"
 		"\n\n", 1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:42:07 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 11:32:48 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h> // perror
 # include <string.h> // strerror
 # include <math.h>
 
@@ -44,6 +43,7 @@ typedef struct	s_color
 	uint32_t	green;
 	uint32_t	blue;
 	uint32_t	alpha;
+	uint32_t	color;
 }	t_color;
 
 typedef struct s_fractol
@@ -51,23 +51,22 @@ typedef struct s_fractol
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	char		*set;
-	uint32_t	max_iter;
-	uint32_t	iter;
 	t_set		julia_c;
 	t_range		real;
 	t_range		imag;
+	uint32_t	max_iter;
+	uint32_t	iter;
 	double		move_factor;
 	double		zoom;
-	uint32_t	pixel_color;
 	t_set		z;
 	t_set		c;
+	t_set		pixel;
 	t_color		get;
 	double		k_red;
 	double		k_green;
 	double		k_blue;
 	int32_t		pixel_x;
 	int32_t		pixel_y;
-	t_set		pixel;
 }	t_fractol;
 
 int	log_err(char *str, char *strerror);
@@ -93,6 +92,7 @@ void	compute_color(t_fractol *fractol);
 
 void	ft_keyhook_general(mlx_key_data_t keydata, void *param);
 void	ft_keyhook_colors(void *param);
+void	ft_keyhook_julia(void *param);
 void	ft_keyhook_arrowkeys(void *param);
 void	ft_scrollhook(double xdelta, double ydelta, void *param);
 

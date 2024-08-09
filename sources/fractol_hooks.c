@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:19:01 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 11:46:05 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,27 @@ void	ft_keyhook_colors(void *param)
 			fractol->k_blue *= 0.5;
 		else
 			fractol->k_blue *= 2;
+	}
+}
+
+void	ft_keyhook_julia(void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_CONTROL))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			fractol->julia_c.x *= 0.9;
+		else
+			fractol->julia_c.x *= 1.1;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT_CONTROL))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT_SHIFT))
+			fractol->julia_c.y *= 0.9;
+		else
+			fractol->julia_c.y *= 1.1;
 	}
 }
 

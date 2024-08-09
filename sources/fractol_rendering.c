@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:04:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:31:09 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:46:19 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_fractol_render(void *param)
 				mandelbrot(x, y, fractol);
 			if (ft_strequ(fractol->set, "burning"))
 				burning_ship(x, y, fractol);
-			mlx_put_pixel(fractol->image, x, y, fractol->pixel_color);
+			mlx_put_pixel(fractol->image, x, y, fractol->get.color);
 			y++;
 		}
 		x++;
