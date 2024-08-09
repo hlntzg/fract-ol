@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:36:12 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:42:07 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef struct 	s_set
 	double	y;
 }	t_set;
 
+typedef struct	s_color
+{
+	uint32_t	red;
+	uint32_t	green;
+	uint32_t	blue;
+	uint32_t	alpha;
+}	t_color;
+
 typedef struct s_fractol
 {
 	mlx_t		*mlx;
@@ -53,7 +61,7 @@ typedef struct s_fractol
 	uint32_t	pixel_color;
 	t_set		z;
 	t_set		c;
-//	t_color		get;
+	t_color		get;
 	double		k_red;
 	double		k_green;
 	double		k_blue;
@@ -61,14 +69,6 @@ typedef struct s_fractol
 	int32_t		pixel_y;
 	t_set		pixel;
 }	t_fractol;
-
-typedef struct	s_color
-{
-	uint32_t	red;
-	uint32_t	green;
-	uint32_t	blue;
-	uint32_t	alpha;
-}	t_color;
 
 int	log_err(char *str, char *strerror);
 int	log_guide(void);
