@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:47:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 12:59:08 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 13:27:52 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,27 @@ int	is_valid_arg(int argc, char **argv)
 int	is_signed_decimal(const char *str)
 {
 	int	decimal_point;
-	int	digit_before_point;
-	int	digit_after_point;
+	int	digits;
 
 	decimal_point = 0;
-	digit_before_point = 0;
-	digit_after_point = 0;
+	digits = 0;
 	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
 	{
 		if (*str == '.')
 		{
-			if (decimal_point == 1)
+			if (decimal_point)
 				return (0);
 			decimal_point = 1;
 		}
-		else if (ft_isdigit(*str))
-		{
-			if (decimal_point == 1)
-				digit_after_point = 1;
-			else
-				digit_before_point = 1;
-		}
+		else if (ft_isdigit((unsigned char)*str))
+			digits = 1;
 		else
 			return (0);
 		str++;
 	}
-	return ((digit_before_point || decimal_point) && (digit_before_point || digit_after_point));
+	return (digits);
 }
 
 double	ft_abs(double nb)
