@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:58:38 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 13:59:04 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 09:46:18 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	mandelbrot(uint32_t x, uint32_t y, t_fractol *fractol)
 
 void	julia(uint32_t x, uint32_t y, t_fractol *fractol)
 {
-	fractol->cx = fractol->julia_cx;
-	fractol->cy = fractol->julia_cy;
+	fractol->cx = fractol->julia_c.x;
+	fractol->cy = fractol->julia_c.y;
 	fractol->pixel_x = x;
 	fractol->pixel_y = y;
 	pixel_to_complex(&(fractol->zx), &(fractol->zy), fractol);

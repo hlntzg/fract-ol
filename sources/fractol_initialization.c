@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:45:39 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/08 17:52:04 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 09:47:59 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_fractol(t_fractol *fractol, char **argv)
 		mlx_close_window(fractol->mlx);
 		exit (EXIT_FAILURE);
 	}
+	log_guide();
 	if (ft_strequ(argv[1], "julia"))
 		init_julia(fractol, argv);
 	fractol->max_iter = 50;
