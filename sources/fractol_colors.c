@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:49:08 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:57:11 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/09 12:14:38 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	compute_color(t_fractol *fractol)
 	fractol->get.green = (sin(fractol->k_green * fractol->iter) * 255);
 	fractol->get.blue = (sin(fractol->k_blue * fractol->iter) * 255);
 	fractol->get.alpha = 255;
-	fractol->get.color = ft_pixel(fractol->get.red, fractol->get.green, fractol->get.blue, fractol->get.alpha);
+	fractol->get.color = ft_pixel(fractol->get.red, fractol->get.green,
+			fractol->get.blue, fractol->get.alpha);
 }
 
 uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t a)
