@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/08 17:49:39 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/09 14:32:12 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ $(NAME): mlx libft $(OBJECTS)
 	@$(CC) $(OBJECTS) $(LIBFT) $(MLXLIB) $(HEADERS) -o $@
 
 mlx:
+	@cd lib && git clone https://github.com/codam-coding-college/MLX42.git
 	@cmake $(DIR_MLX) -B $(DIR_MLX)/build && make -C $(DIR_MLX)/build -j4
 
 libft:
