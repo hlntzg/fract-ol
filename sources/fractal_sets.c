@@ -6,15 +6,15 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:58:38 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:27:26 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/12 09:49:49 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/* this function maps the pixel coordinates to complex number (r real part,
-i imaginary part), by calculating the size of each pixel in the complex plane 
-and translating the coordinates(x, y) to complex number */
+/* This function maps the pixel coordinates to complex number (r real part, i
+ * imaginary part), by calculating the size of each pixel in the complex plane 
+ * and translating the coordinates on the screen(x, y) to complex number. */
 void	pixel_to_complex(double *r, double *i, t_fractol *fractol)
 {
 	double	pixel_width;
@@ -26,6 +26,9 @@ void	pixel_to_complex(double *r, double *i, t_fractol *fractol)
 	*i = fractol->imag.max - (double) fractol->pixel_y * pixel_height;
 }
 
+/* This function initializes the complex number z to (0, 0), converts the
+ * pixel coordinates to a complex number c, and then calculates the escape
+ * time and computes a color to each pixel on mandelbrot set. */
 void	mandelbrot(uint32_t x, uint32_t y, t_fractol *fractol)
 {
 	fractol->z.x = 0.0;
@@ -37,6 +40,9 @@ void	mandelbrot(uint32_t x, uint32_t y, t_fractol *fractol)
 	compute_color(fractol);
 }
 
+/* This function uses a fixed complex number c, converts the pixel coordinates
+ * to a complex number z, and then calculates the escape time and correspondent
+ * color to each pixel on julia set. */
 void	julia(uint32_t x, uint32_t y, t_fractol *fractol)
 {
 	fractol->c.x = fractol->julia_c.x;
@@ -48,6 +54,9 @@ void	julia(uint32_t x, uint32_t y, t_fractol *fractol)
 	compute_color(fractol);
 }
 
+/* This function initializes the complex number z to (0, 0), converts the
+ * pixel coordinates to a complex number c, and then calculates the escape
+ * time using the burning ship equation and determines the color. */
 void	burning_ship(uint32_t x, uint32_t y, t_fractol *fractol)
 {
 	fractol->z.x = 0.0;

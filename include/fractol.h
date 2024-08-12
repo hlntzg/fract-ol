@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 13:43:53 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/12 10:41:53 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		ft_scrollhook(double xdelta, double ydelta, void *param);
 int			log_err(char *str, char *strerror);
 int			log_guide(void);
 int			is_valid_arg(int argc, char **argv);
+int			is_valid_extra_args(int argc, char **argv);
 int			is_signed_decimal(const char *str);
 double		ft_abs(double nb);
 

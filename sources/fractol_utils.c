@@ -6,13 +6,15 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:47:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 13:27:52 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/12 10:49:05 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	is_valid_extra_args(int argc, char **argv)
+/* This function validates the extra command-line arguments provided for julia
+ *  set and logs error messages and return 0 if it is invalid arguments. */
+int	is_valid_extra_args(int argc, char **argv)
 {
 	if (argc == 3 && ft_strequ(argv[1], "julia"))
 	{
@@ -33,6 +35,8 @@ static int	is_valid_extra_args(int argc, char **argv)
 	return (0);
 }
 
+/* This function checks the validity of argument according to available fractal
+ * setsa and return error message and 0, or return 1 if arguments is valid. */
 int	is_valid_arg(int argc, char **argv)
 {
 	int	i;

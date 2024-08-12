@@ -6,25 +6,27 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:45:39 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 10:55:28 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/12 10:41:01 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/* This function initializes the fractal environment and the MLX42 library and
+ * displays the image in the window. Logs the guide for user instructions. */
 void	init_fractol(t_fractol *fractol, char **argv)
 {
 	fractol->set = argv[1];
-	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->set, true);
+	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->set, false);
 	if (!(fractol->mlx))
 		exit (EXIT_FAILURE);
 	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(fractol->mlx, fractol->image, 0, 0);
 	if (!(fractol->image))
 	{
 		mlx_close_window(fractol->mlx);
 		exit (EXIT_FAILURE);
 	}
+	mlx_image_to_window(fractol->mlx, fractol->image, 0, 0);
 	log_guide();
 	if (ft_strequ(argv[1], "julia"))
 		init_julia(fractol, argv);
@@ -34,6 +36,8 @@ void	init_fractol(t_fractol *fractol, char **argv)
 	init_colors(fractol);
 }
 
+/* This specific function sets the real and imaginary ranges for different
+ * fractal types to initialize the view. */
 void	init_view(t_fractol *fractol)
 {
 	if (ft_strequ(fractol->set, "julia"))
@@ -59,6 +63,8 @@ void	init_view(t_fractol *fractol)
 	}
 }
 
+/* This function set low values to initial color parameters, resulting 
+ * in a grayscale appearance for the first rendered image. */
 void	init_colors(t_fractol *fractol)
 {
 	fractol->k_red = 0.01;
@@ -66,6 +72,8 @@ void	init_colors(t_fractol *fractol)
 	fractol->k_blue = 0.01;
 }
 
+/* This function initializes the complex constant for the julia fractal
+ * set based on parameters from the user or default values. */
 void	init_julia(t_fractol *fractol, char **argv)
 {
 	if (!argv[2])

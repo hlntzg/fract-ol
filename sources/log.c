@@ -6,12 +6,14 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:53:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 12:03:46 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/12 10:58:53 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/* Logs an error message to stderr with a red color prefix based on the ANSI
+ * escape codes, then resets all attributes to default. */
 int	log_err(char *str, char *strerror)
 {
 	ft_putstr_fd("\033[0;31m", 1);
@@ -22,6 +24,7 @@ int	log_err(char *str, char *strerror)
 	return (1);
 }
 
+/* This function log instructions for the user in the stdout. */
 int	log_guide(void)
 {
 	ft_putstr_fd("\nAvailable fractal sets:"

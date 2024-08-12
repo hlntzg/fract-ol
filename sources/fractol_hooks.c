@@ -6,12 +6,14 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 11:46:05 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/12 10:15:47 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/* General key hook function to handle closing the window, reseting the image
+ * on the screen and its colors, and adjusts the max number of iterations. */
 void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 {
 	t_fractol	*fractol;
@@ -33,6 +35,7 @@ void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 		fractol->max_iter *= 0.5;
 }
 
+/* Key hook function to adjust the color components (RGB) of the fractal. */
 void	ft_keyhook_colors(void *param)
 {
 	t_fractol	*fractol;
@@ -61,6 +64,7 @@ void	ft_keyhook_colors(void *param)
 	}
 }
 
+/* Key hook function to modify the Julia set's constant (julia_c). */
 void	ft_keyhook_julia(void *param)
 {
 	t_fractol	*fractol;
@@ -82,6 +86,9 @@ void	ft_keyhook_julia(void *param)
 	}
 }
 
+/* Key hook function to move the fractal view using arrow keys.
+ * Arrow keys: Adjust the view by shifting the real and imaginary ranges.
+ * The view shifts by a fraction of the current view's range. */
 void	ft_keyhook_arrowkeys(void *param)
 {
 	t_fractol	*fractol;
@@ -111,6 +118,9 @@ void	ft_keyhook_arrowkeys(void *param)
 	}
 }
 
+/* Scroll hook function to handle zooming in and out based on the current mouse
+ * position which is defined by pixel_x and pixel_y. Scroll up reduces the view
+ * range (zoom in) and scroll down increases the view range (zoom out). */
 void	ft_scrollhook(double xdelta, double ydelta, void *param)
 {
 	t_fractol	*fractol;
