@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 13:19:57 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/12 11:00:55 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/15 09:28:00 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ OBJECTS = $(SRC:.c=.o)
 
 HEADERS = -I ./include -I $(DIR_MLX)/include -I $(DIR_LIBFT)
 
-# MLX42 is dependent on other libraries (dl - dynamically loaded library, glfw - graphics library framework, m - math library)
-MLXLIB = $(DIR_MLX)/build/libmlx42.a -ldl -lglfw -lm -lpthread 
+# MLX42 is dependent on other libraries (dl-dynamically loaded, glfw-graphics library framework, m-math)
+MLXLIB = $(DIR_MLX)/build/libmlx42.a -ldl -lglfw -lm
 
 LIBFT = -L $(DIR_LIBFT) -lft
 
