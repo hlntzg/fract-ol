@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 10:15:47 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/15 13:46:27 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 
 	fractol = (t_fractol *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		mlx_delete_image(fractol->mlx, fractol->image);
 		mlx_close_window(fractol->mlx);
+	}
 	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
 		log_guide();
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)

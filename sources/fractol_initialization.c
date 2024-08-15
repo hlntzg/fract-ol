@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:45:39 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 10:41:01 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/15 13:46:07 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_fractol(t_fractol *fractol, char **argv)
 	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
 	if (!(fractol->image))
 	{
+		mlx_delete_image(fractol->mlx, fractol->image);
 		mlx_close_window(fractol->mlx);
 		exit (EXIT_FAILURE);
 	}

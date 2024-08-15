@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:53:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 10:58:53 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/15 13:58:12 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	log_guide(void)
 		"\n\nMore options for Julia:""\n\tCONTROL_LEFT to increase the real part "
 		"of the complex constant, and CONTROL_LEFT + SHIFT_LEFT to decrease it;"
 		"\n\tCONTROL_RIGHT to increase the imaginary part of the complex "
-		"constant, and CONTROL_LEFT + SHIFT_LEFT to decrease it;"
+		"constant, and CONTROL_RIGHT + SHIFT_RIGHT to decrease it;"
 		"\n\n", 1);
 	return (1);
 }
