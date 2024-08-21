@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:58:38 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 09:49:49 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 12:15:04 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,5 @@ void	julia(uint32_t x, uint32_t y, t_fractol *fractol)
 	fractol->pixel_y = y;
 	pixel_to_complex(&(fractol->z.x), &(fractol->z.y), fractol);
 	compute_escape_time(fractol);
-	compute_color(fractol);
-}
-
-/* This function initializes the complex number z to (0, 0), converts the
- * pixel coordinates to a complex number c, and then calculates the escape
- * time using the burning ship equation and determines the color. */
-void	burning_ship(uint32_t x, uint32_t y, t_fractol *fractol)
-{
-	fractol->z.x = 0.0;
-	fractol->z.y = 0.0;
-	fractol->pixel_x = x;
-	fractol->pixel_y = y;
-	pixel_to_complex(&(fractol->c.x), &(fractol->c.y), fractol);
-	compute_escape_time_burning(fractol);
 	compute_color(fractol);
 }

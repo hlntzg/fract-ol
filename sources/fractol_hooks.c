@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/15 13:46:27 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 14:44:27 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,47 +24,10 @@ void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 		mlx_delete_image(fractol->mlx, fractol->image);
 		mlx_close_window(fractol->mlx);
 	}
-	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
-		log_guide();
-	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
-	{
-		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			init_colors(fractol);
-		init_view(fractol);
-	}
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD))
-		fractol->max_iter *= 2;
+		fractol->max_iter *= 1.2;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT))
-		fractol->max_iter *= 0.5;
-}
-
-/* Key hook function to adjust the color components (RGB) of the fractal. */
-void	ft_keyhook_colors(void *param)
-{
-	t_fractol	*fractol;
-
-	fractol = (t_fractol *)param;
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_R))
-	{
-		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			fractol->k_red *= 0.5;
-		else
-			fractol->k_red *= 2;
-	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_G))
-	{
-		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			fractol->k_green *= 0.5;
-		else
-			fractol->k_green *= 2;
-	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_B))
-	{
-		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			fractol->k_blue *= 0.5;
-		else
-			fractol->k_blue *= 2;
-	}
+		fractol->max_iter *= 0.2;
 }
 
 /* Key hook function to modify the Julia set's constant (julia_c). */

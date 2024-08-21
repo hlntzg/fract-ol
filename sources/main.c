@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 12:17:41 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/15 13:35:46 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 12:36:36 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 		return (log_guide());
 	init_fractol(&fractol, argv);
 	mlx_key_hook(fractol.mlx, ft_keyhook_general, &fractol);
-	mlx_loop_hook(fractol.mlx, ft_keyhook_colors, &fractol);
 	mlx_loop_hook(fractol.mlx, ft_keyhook_julia, &fractol);
 	mlx_loop_hook(fractol.mlx, ft_keyhook_arrowkeys, &fractol);
 	mlx_loop_hook(fractol.mlx, ft_fractol_render, &fractol);

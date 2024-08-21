@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:47:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 10:49:05 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 12:26:02 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	is_valid_arg(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		i = (ft_strequ(argv[1], "mandelbrot") || ft_strequ(argv[1], "julia")
-				|| ft_strequ(argv[1], "burning"));
+		i = (ft_strequ(argv[1], "mandelbrot") || ft_strequ(argv[1], "julia"));
 		if (i == 0)
 			log_err("Invalid argument for [fractal_set_name], "
 				"follow the instructions.", strerror(5));
@@ -78,12 +77,4 @@ int	is_signed_decimal(const char *str)
 		str++;
 	}
 	return (digits);
-}
-
-double	ft_abs(double nb)
-{
-	if (nb < 0)
-		return (-nb);
-	else
-		return (nb);
 }

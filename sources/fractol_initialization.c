@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:45:39 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/15 13:46:07 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 14:54:03 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,15 @@ void	init_view(t_fractol *fractol)
 		fractol->imag.min = -1.2;
 		fractol->imag.max = 1.2;
 	}
-	else if (ft_strequ(fractol->set, "burning"))
-	{
-		fractol->real.min = -1.0;
-		fractol->real.max = 2.0;
-		fractol->imag.min = -1.0;
-		fractol->imag.max = 2.0;
-	}
 }
 
 /* This function set low values to initial color parameters, resulting 
  * in a grayscale appearance for the first rendered image. */
 void	init_colors(t_fractol *fractol)
 {
-	fractol->k_red = 0.01;
-	fractol->k_green = 0.01;
-	fractol->k_blue = 0.01;
+	fractol->k_red = 0.16;
+	fractol->k_green = 0.08;
+	fractol->k_blue = 0.04;
 }
 
 /* This function initializes the complex constant for the julia fractal

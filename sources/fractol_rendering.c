@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:04:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 09:44:28 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 12:22:12 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	ft_fractol_render(void *param)
 				julia(x, y, fractol);
 			if (ft_strequ(fractol->set, "mandelbrot"))
 				mandelbrot(x, y, fractol);
-			if (ft_strequ(fractol->set, "burning"))
-				burning_ship(x, y, fractol);
 			mlx_put_pixel(fractol->image, x, y, fractol->get.color);
 			y++;
 		}
@@ -64,30 +62,6 @@ void	compute_escape_time(t_fractol *fractol)
 		tmp = zx;
 		zx = (zx * zx) - (zy * zy) + cx;
 		zy = 2 * tmp * zy + cy;
-		fractol->iter++;
-	}
-}
-
-/* This function has a similar logic to compute_escape_time(), with the
-exception that the equation differs for  burning ship fractal. */
-void	compute_escape_time_burning(t_fractol *fractol)
-{
-	double	tmp;
-	double	zx;
-	double	zy;
-	double	cx;
-	double	cy;
-
-	zx = fractol->z.x;
-	zy = fractol->z.y;
-	cx = fractol->c.x;
-	cy = fractol->c.y;
-	fractol->iter = 0;
-	while ((zx * zx) + (zy * zy) < 4.0 && fractol->iter < fractol->max_iter)
-	{
-		tmp = zx;
-		zx = (zx * zx) - (zy * zy) - cx;
-		zy = 2 * ft_abs(tmp * zy) - cy;
 		fractol->iter++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/12 10:41:53 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 12:37:09 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,13 @@ void		init_julia(t_fractol *fractol, char **argv);
 void		ft_fractol_render(void *param);
 void		julia(uint32_t x, uint32_t y, t_fractol *fractol);
 void		mandelbrot(uint32_t x, uint32_t y, t_fractol *fractol);
-void		burning_ship(uint32_t x, uint32_t y, t_fractol *fractol);
 
 void		pixel_to_complex(double *r, double *i, t_fractol *fractol);
 void		compute_escape_time(t_fractol *fractol);
-void		compute_escape_time_burning(t_fractol *fractol);
 void		compute_color(t_fractol *fractol);
 uint32_t	ft_pixel(uint32_t red, uint32_t green, uint32_t blue, uint32_t a);
 
 void		ft_keyhook_general(mlx_key_data_t keydata, void *param);
-void		ft_keyhook_colors(void *param);
 void		ft_keyhook_julia(void *param);
 void		ft_keyhook_arrowkeys(void *param);
 void		ft_scrollhook(double xdelta, double ydelta, void *param);
@@ -95,6 +92,5 @@ int			log_guide(void);
 int			is_valid_arg(int argc, char **argv);
 int			is_valid_extra_args(int argc, char **argv);
 int			is_signed_decimal(const char *str);
-double		ft_abs(double nb);
 
 #endif
