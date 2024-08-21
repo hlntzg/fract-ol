@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 14:44:27 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 15:35:17 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 		mlx_delete_image(fractol->mlx, fractol->image);
 		mlx_close_window(fractol->mlx);
 	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD))
-		fractol->max_iter *= 1.2;
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT))
-		fractol->max_iter *= 0.2;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT)
+		&& fractol->max_iter > 5)
+		fractol->max_iter *= 0.9;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD)
+		&& fractol->max_iter < 500)
+		fractol->max_iter *= 1.1;
 }
 
 /* Key hook function to modify the Julia set's constant (julia_c). */
