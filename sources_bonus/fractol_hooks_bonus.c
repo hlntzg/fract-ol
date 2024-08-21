@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 14:10:49 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 12:08:59 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 14:55:19 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_keyhook_general(mlx_key_data_t keydata, void *param)
 		init_view(fractol);
 	}
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD))
-		fractol->max_iter *= 2;
+		fractol->max_iter *= 1.2;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT))
-		fractol->max_iter *= 0.5;
+		fractol->max_iter *= 0.2;
 }
 
 /* Key hook function to adjust the color components (RGB) of the fractal. */
