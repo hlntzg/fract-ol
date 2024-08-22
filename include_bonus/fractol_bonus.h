@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:25:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 16:08:49 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/22 10:53:01 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_fractol
 	uint32_t	max_iter;
 	uint32_t	iter;
 	double		move_factor;
-	double		zoom;
 	t_set		z;
 	t_set		c;
 	t_set		pixel;

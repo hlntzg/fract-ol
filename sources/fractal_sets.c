@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:58:38 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 12:15:04 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:20:57 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	pixel_to_complex(double *r, double *i, t_fractol *fractol)
 
 	pixel_width = (fractol->real.max - fractol->real.min) / WIDTH;
 	pixel_height = (fractol->imag.max - fractol->imag.min) / HEIGHT;
-	*r = fractol->real.min + (double) fractol->pixel_x * pixel_width;
-	*i = fractol->imag.max - (double) fractol->pixel_y * pixel_height;
+	*r = fractol->real.min + ((double) fractol->pixel_x * pixel_width);
+	*i = fractol->imag.max - ((double) fractol->pixel_y * pixel_height);
 }
 
 /* This function initializes the complex number z to (0, 0), converts the

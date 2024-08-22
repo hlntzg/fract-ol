@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:47:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 12:26:02 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/22 09:53:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_valid_extra_args(int argc, char **argv)
 	{
 		if (!is_signed_decimal(argv[2]))
 			log_err("Invalid argument for [unsigned_double_a], "
-				"follow the instructions.", strerror(5));
+				"follow the instructions.", strerror(22));
 		return (is_signed_decimal(argv[2]));
 	}
 	else if (argc == 4 && ft_strequ(argv[1], "julia"))
@@ -28,7 +28,7 @@ int	is_valid_extra_args(int argc, char **argv)
 		if (!is_signed_decimal(argv[2]) || !is_signed_decimal(argv[3]))
 			log_err("Invalid argument for [unsigned_double_a], "
 				"and/or [unsigned_double_b], "
-				"follow the instructions.", strerror(5));
+				"follow the instructions.", strerror(22));
 		return (is_signed_decimal(argv[2]) && is_signed_decimal(argv[3]));
 	}
 	log_err("Invalid extra arguments, follow the instructions.", strerror(5));
@@ -46,7 +46,7 @@ int	is_valid_arg(int argc, char **argv)
 		i = (ft_strequ(argv[1], "mandelbrot") || ft_strequ(argv[1], "julia"));
 		if (i == 0)
 			log_err("Invalid argument for [fractal_set_name], "
-				"follow the instructions.", strerror(5));
+				"follow the instructions.", strerror(22));
 		return (i);
 	}
 	else
@@ -70,7 +70,7 @@ int	is_signed_decimal(const char *str)
 				return (0);
 			decimal_point = 1;
 		}
-		else if (ft_isdigit((unsigned char)*str))
+		else if (ft_isdigit((unsigned char) *str))
 			digits = 1;
 		else
 			return (0);

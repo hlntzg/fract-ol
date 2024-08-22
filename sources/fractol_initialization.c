@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:45:39 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 15:18:27 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/22 10:00:45 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ void	init_fractol(t_fractol *fractol, char **argv)
 	fractol->set = argv[1];
 	fractol->mlx = mlx_init(WIDTH, HEIGHT, fractol->set, false);
 	if (!(fractol->mlx))
+	{
+		log_err("Failed to initialize MLX42 library.", strerror(22));
 		exit (EXIT_FAILURE);
+	}
 	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
 	if (!(fractol->image))
 	{
+		log_err("Failed to create a new image.", strerror(22));
 		mlx_delete_image(fractol->mlx, fractol->image);
 		mlx_close_window(fractol->mlx);
 		exit (EXIT_FAILURE);
