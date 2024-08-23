@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:53:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 12:24:07 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/23 15:09:35 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	log_guide(void)
 		"\n\tmandelbrot;""\n\tjulia;"
 		"\n\nGuide for fract-ol usage:"
 		"\n\t./fractol [fractal_set_name] or to create a specific Julia set:"
-		"\n\t./fractol julia [unsigned_double_a] [unsigned_double_b]"
+		"\n\t./fractol julia [signed_double_a] [signed_double_b]"
 		"\n\nExamples for Julia sets:\n\t-0.4\t0.6\n\t0.285\t0.01\n\t0\t0.8"
 		"\n\t-1.476\t0\n\t-0.12\t-0.77"
 		"\n\nGeneral guide:"
